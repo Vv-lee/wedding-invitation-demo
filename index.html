@@ -1,69 +1,82 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="romantic">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#294a3d">
-  <meta name="description" content="一封关于爱与相聚的邀请。婚礼邀请函设计示例，人物、时间及地点均为演示信息。">
-  <title>予你，一生 · 婚礼邀请函 Demo</title>
-  <link rel="icon" href="./botanical.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./style.css">
-  <script src="./app.js" defer></script>
+  <meta name="theme-color" content="#f8efeb">
+  <meta name="description" content="李有为与谢妍诚邀您见证我们的幸福。2027年1月30日，泰兴金陵国际大酒店，四楼水晶厅。15:30迎宾，18:18开席。">
+  <meta property="og:title" content="李有为 & 谢妍 · 婚礼邀请函">
+  <meta property="og:description" content="有你相伴，岁岁妍好。2027.01.30，泰兴金陵国际大酒店，期待与你相见。">
+  <title>李有为 & 谢妍 · 2027.01.30 婚礼邀请函</title>
+  <link rel="icon" href="./assets/monogram.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css?v=20261026-3">
+  <script src="./app.js?v=20261026-3" defer></script>
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="#home" aria-label="回到邀请函首页">Y <span>&</span> Z <i>一纸良缘</i></a>
-    <nav aria-label="主导航"><a href="#letter">一封邀请</a><a href="#details">婚礼详情</a><a href="#journey">赴约指南 <span>↗</span></a></nav>
-    <span class="demo-label">设计示例 DEMO</span>
+  <div class="design-bar" aria-label="设计方案切换">
+    <span class="design-caption">DESIGN COLLECTION <b>三款设计预览</b></span>
+    <nav class="theme-picker" aria-label="选择邀请函设计">
+      <a href="?style=romantic" data-theme-link="romantic" aria-current="page"><i></i><span>01 浪漫西式</span></a>
+      <a href="?style=modern" data-theme-link="modern"><i></i><span>02 现代中式</span></a>
+      <a href="?style=garden" data-theme-link="garden"><i></i><span>03 清新花园</span></a>
+    </nav>
+  </div>
+  <header class="site-header">
+    <a href="#home" class="brand" aria-label="李有为与谢妍的邀请函首页"><span>Y<span class="brand-and">&</span>Y</span><small>YOUWEI & YAN</small></a>
+    <nav class="section-nav" aria-label="请柬导航"><a href="#letter">一封邀请</a><a href="#day">婚礼日程</a><a href="#moments">我们的影像</a><a href="#venue">赴约指南 ↗</a></nav>
+    <button class="music-toggle" id="music" type="button" aria-pressed="false" aria-label="播放婚礼轻音乐"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3m9 6h-3M12 21v-3M3 12h3"/></svg><span id="music-label">开启音乐</span></button>
   </header>
   <main>
-    <section class="hero" id="home" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <p class="eyebrow"><span class="tiny-line"></span> TOGETHER WITH YOU</p>
-        <p class="pretitle">关于我们，也关于有你在场。</p>
-        <h1 id="hero-title">予你，<br><span>一生。</span><svg class="title-flower" viewBox="0 0 80 90" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.2"><path d="M40 88Q35 52 45 25M40 69Q15 70 13 52Q35 48 40 69M40 51Q65 52 67 37Q49 34 40 51"/><path d="M45 29C23 41 22 11 38 17C29-5 59-4 54 14C75 7 78 36 57 29C56 47 36 48 45 29Z"/><circle cx="49" cy="23" r="5"/></g></svg></h1>
-        <div class="couple"><span>林予安</span><em>&</em><span>周知夏</span></div>
-        <p class="hero-description">我们要结婚啦。<br>想把这一天的欢喜，郑重地分享给你。</p>
-        <a class="button primary" href="#details">收下这份邀请 <span>↗</span></a>
-        <div class="hero-date"><span>2027.05.20</span><i></i><span>中国 · 杭州</span></div>
-      </div>
-      <div class="hero-art">
-        <span class="art-caption">THE BEGINNING OF OUR ALWAYS</span>
-        <div class="arch">
-          <img src="./botanical.svg" alt="橄榄枝与白色花朵环绕着两枚金色婚戒的原创插画" width="560" height="660">
-          <div class="arch-type"><span>We're getting</span><strong>Married.</strong><small>YOU ARE PART OF OUR STORY</small></div>
+    <div id="home" class="hero-wrap">
+      <section class="hero hero-romantic" aria-labelledby="romantic-title">
+        <img src="./assets/ribbon.svg" class="ribbon ribbon-first" alt="" width="500" height="350">
+        <img src="./assets/ribbon.svg" class="ribbon ribbon-second" alt="" width="500" height="350">
+        <div class="romantic-frame">
+          <p class="eyebrow">A LITTLE PROMISE. A LIFETIME OF LOVE.</p>
+          <div class="love-crest" aria-hidden="true"><span>Y</span><span>Y</span><i>✧</i></div>
+          <p class="hero-kicker">以爱为名 · 邀你共赴</p>
+          <h1 id="romantic-title">Youwei <em>&</em> Yan</h1>
+          <p class="full-names">李有为 <span>&</span> 谢妍</p>
+          <div class="romantic-rule"><i></i><span>有你相伴，岁岁妍好。</span><i></i></div>
+          <p class="wedding-date">JANUARY 30, 2027</p>
+          <p class="wedding-place">中国 · 泰兴　/　金陵国际大酒店</p>
+          <a href="#day" class="button primary">打开这封邀请 <span>↓</span></a>
         </div>
-        <div class="date-stamp"><span>MAY</span><strong>20</strong><span>2027 · THU</span></div>
-        <span class="art-bottom">一生很长，幸好有你。</span>
-      </div>
-      <a class="scroll-hint" href="#letter"><span>向下，打开我们的故事</span> ↓</a>
+        <span class="hero-side-note">TOGETHER IS A BEAUTIFUL PLACE TO BE.</span>
+      </section>
+      <section class="hero hero-modern" aria-labelledby="modern-title">
+        <div class="modern-intro"><p class="eyebrow">THE WEDDING OF YOUWEI & YAN</p><p class="modern-preface">两姓联姻 · 一堂缔约</p><h1 id="modern-title">良辰有为，<br><em>岁岁妍好。</em></h1><p class="modern-subtitle">以爱之名，邀你共赴这场人生喜事。</p><a href="#day" class="button primary">请赴我们的婚礼 <span>↗</span></a><div class="modern-date"><span>2027</span><strong>01.30</strong><small>星期六 · 泰兴</small></div></div>
+        <div class="modern-poster"><span class="poster-corner">囍</span><div class="poster-top"><span>天作之合</span><i></i><span>佳偶礼成</span></div><div class="chinese-name-art"><div><small>新郎</small><span>李</span><strong>有为</strong></div><em>与</em><div><small>新娘</small><span>谢</span><strong>妍</strong></div></div><div class="name-seal" aria-label="有为妍好">有为<br>妍好</div><p>一生一世一双人</p><span class="poster-bottom">YOUWEI LI & YAN XIE</span></div>
+      </section>
+      <section class="hero hero-garden" aria-labelledby="garden-title">
+        <div class="garden-copy"><p class="eyebrow">AN INVITATION TO OUR FOREVER</p><span class="garden-tiny-flower" aria-hidden="true">✳</span><h1 id="garden-title">Love,<br><em>in bloom.</em></h1><p class="garden-names">李有为 <span>&</span> 谢妍</p><p class="garden-theme">有你相伴，岁岁妍好。</p><a href="#day" class="button primary">共赴一场好时光 <span>↗</span></a><span class="garden-date">30 JAN 2027　·　TAIXING</span></div>
+        <div class="garden-envelope"><div class="envelope-back"></div><div class="garden-letter"><img src="./assets/meadow.svg" alt="" width="440" height="560"><p class="eyebrow">WE'RE GETTING MARRIED</p><div class="garden-letter-type">有为<span>&</span>妍</div><p class="garden-letter-theme">把余生，写成我们。</p><div class="garden-mini-date"><span>JANUARY</span><strong>30</strong><span>2027 · SATURDAY</span></div></div><div class="envelope-front"></div><div class="envelope-seal" aria-hidden="true">Y&Y</div><span class="envelope-note">A LETTER, JUST FOR YOU.</span></div>
+      </section>
+    </div>
+    <section id="letter" class="letter section">
+      <span class="section-index">01 / THE INVITATION</span><p class="eyebrow">DEAR FAMILY & FRIENDS</p>
+      <h2>一封，写给你的邀请。</h2><span class="little-flower" aria-hidden="true">✧</span>
+      <p>人生有许多值得珍藏的瞬间，<br>而这一次，我们想与你一起。</p>
+      <p>我们即将携手走进人生的新篇章。<br>在这个特别的日子，<br>诚挚邀请你赴一场关于爱与相聚的约定，<br>一同举杯，把欢喜留在彼此的记忆里。</p>
+      <p class="letter-ending">有你在场，便是圆满。</p><div class="signature"><span>有为</span><i>&</i><span>妍</span></div>
     </section>
-    <section class="letter section" id="letter" aria-labelledby="letter-title">
-      <p class="eyebrow">A LITTLE LOVE LETTER</p>
-      <h2 id="letter-title">这一天，想和你一起。</h2>
-      <span class="ornament" aria-hidden="true">✳</span>
-      <p>从两个人的日常，到两个家庭的相聚，<br>我们终于要把“以后”，写成“余生”。</p>
-      <p>这一路，感谢你的陪伴、惦念与祝福。<br>所以，在这个特别的日子，<br>我们想为你留一个位置，<br>一起吃顿饭、聊聊天，见证一场关于爱的约定。</p>
-      <p class="letter-sign">期待相见，<span>予安 & 知夏</span></p>
+    <section id="day" class="day section">
+      <div class="section-heading"><div><p class="eyebrow">SAVE OUR DATE</p><h2>这一天，为你留席。</h2></div><span class="section-index">02 / THE WEDDING DAY</span></div>
+      <div class="day-layout"><div class="date-card"><div class="date-card-top"><span>JANUARY</span><span>2027</span></div><strong>30</strong><p>星期六 · 宜相聚</p><div class="calendar-week" aria-hidden="true"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span><i>25</i><i>26</i><i>27</i><i>28</i><i>29</i><i class="chosen-day">30</i><i>31</i></div><button id="calendar" class="calendar-button" type="button">＋ 保存婚礼日历</button></div><div class="day-program"><p class="day-intro">2027 年 1 月 30 日<br><strong>金陵国际大酒店 · 四楼水晶厅</strong></p><div class="program-row"><span class="program-icon" aria-hidden="true">✧</span><time datetime="2027-01-30T15:30:00+08:00">15:30</time><div><h3>恭候你的到来</h3><p>迎宾入席，与亲友相聚。</p></div><span class="program-number">01</span></div><div class="program-row"><span class="program-icon" aria-hidden="true">♧</span><time datetime="2027-01-30T18:18:00+08:00">18:18</time><div><h3>共一席好时光</h3><p>婚宴开席，举杯分享欢喜。</p></div><span class="program-number">02</span></div><p class="day-footnote">愿这一天，有爱、有笑，也有你。</p></div></div>
     </section>
-    <section class="details section" id="details" aria-labelledby="details-title">
-      <div class="section-heading"><div><p class="eyebrow">SAVE THE DATE</p><h2 id="details-title">把这一天，留给我们。</h2></div><span class="section-number">01 / 邀请</span></div>
-      <div class="event-card">
-        <div class="big-date"><span>二〇二七年 · 五月</span><strong>20</strong><span>星期四 · 宜相聚</span></div>
-        <div class="event-info"><p class="small-label">WEDDING CEREMONY</p><h3>一场花园里的婚礼</h3><p class="event-time">2027 年 5 月 20 日　15:30 迎宾</p><div class="event-place"><span aria-hidden="true">⌖</span><div><strong>杭州 · 花园酒店</strong><p>西湖区 · 草坪仪式区（示例场地）</p></div></div><button class="button outline" id="calendar">保存到日历 <span>＋</span></button><small class="demo-note">姓名、日期、场地均为演示，可替换为你们的信息。</small></div>
-      </div>
+    <section id="moments" class="moments section">
+      <div class="section-heading"><div><p class="eyebrow">OUR MOMENTS, TO BE CONTINUED</p><h2>把我们，留在时光里。</h2></div><span class="section-index">03 / LITTLE MOMENTS</span></div>
+      <div class="photo-grid"><figure class="photo-frame photo-one"><div class="photo-placeholder"><span class="photo-outline" aria-hidden="true"></span><i>01</i><span>YOU & ME</span><small>影像待续</small></div><figcaption><span>两个人的日常</span><i>our little world</i></figcaption></figure><figure class="photo-frame photo-two"><div class="photo-placeholder"><span class="photo-outline" aria-hidden="true"></span><i>02</i><span>THE LITTLE THINGS</span><small>影像待续</small></div><figcaption><span>平凡里的浪漫</span><i>the moments between</i></figcaption></figure><figure class="photo-frame photo-three"><div class="photo-placeholder"><span class="photo-outline" aria-hidden="true"></span><i>03</i><span>ALWAYS & FOREVER</span><small>影像待续</small></div><figcaption><span>余生的序章</span><i>our forever begins</i></figcaption></figure></div>
+      <p class="moments-note">故事很长，照片会慢慢补上。<br>先把这一份期待，与你分享。</p>
     </section>
-    <section class="schedule section" aria-labelledby="schedule-title">
-      <div class="section-heading"><div><p class="eyebrow">THE WEDDING DAY</p><h2 id="schedule-title">慢慢来，好好相聚。</h2></div><span class="section-number">02 / 当天</span></div>
-      <ol class="timeline"><li><span class="step-icon" aria-hidden="true">✳</span><time>15:30</time><h3>赴一场约</h3><p>迎宾签到 · 拍照留念</p></li><li><span class="step-icon rings" aria-hidden="true">∞</span><time>16:18</time><h3>说一句愿意</h3><p>草坪仪式 · 交换誓言</p></li><li><span class="step-icon" aria-hidden="true">♧</span><time>17:00</time><h3>把欢喜定格</h3><p>合影时光 · 自由交流</p></li><li><span class="step-icon" aria-hidden="true">✧</span><time>18:00</time><h3>共一席好时光</h3><p>婚宴开席 · 举杯同庆</p></li></ol>
+    <section id="venue" class="venue section">
+      <div class="venue-copy"><p class="eyebrow">MEET US HERE</p><h2>奔赴的终点，<br>是我们的相聚。</h2><p class="venue-city">江苏 · 泰州 · 泰兴</p><h3>金陵国际大酒店</h3><p class="venue-address" id="address">江苏省泰州市泰兴市国庆中路130号</p><button class="text-button" id="copy-address" type="button">复制完整地址 <span>↗</span></button></div>
+      <div class="venue-card"><span class="venue-card-small">YOUR SEAT IS WAITING</span><div class="floor">4<span>F</span></div><h3>水晶厅</h3><p>迎宾 15:30　·　开席 18:18</p><div class="map-buttons"><a id="amap" class="button primary" href="https://uri.amap.com/search?keyword=%E6%B3%B0%E5%85%B4%E9%87%91%E9%99%B5%E5%9B%BD%E9%99%85%E5%A4%A7%E9%85%92%E5%BA%97&amp;city=%E6%B3%B0%E5%85%B4%E5%B8%82&amp;view=map&amp;callnative=1&amp;src=youweili-yanxie-wedding" target="_blank" rel="noopener noreferrer">高德地图导航 <span>↗</span></a><a id="tencent-map" class="button outline" href="https://apis.map.qq.com/uri/v1/routeplan?type=drive&amp;to=%E6%B1%9F%E8%8B%8F%E7%9C%81%E6%B3%B0%E5%85%B4%E5%B8%82%E5%9B%BD%E5%BA%86%E4%B8%AD%E8%B7%AF130%E5%8F%B7%20%E9%87%91%E9%99%B5%E5%9B%BD%E9%99%85%E5%A4%A7%E9%85%92%E5%BA%97&amp;referer=youweili-yanxie-wedding" target="_blank" rel="noopener noreferrer">腾讯地图导航 <span>↗</span></a></div><small>高德：打开酒店定位后选择路线。<br>腾讯：直接打开前往酒店的路线规划。</small></div>
     </section>
-    <section class="journey section" id="journey" aria-labelledby="journey-title">
-      <div class="journey-intro"><p class="eyebrow">FIND YOUR WAY TO US</p><h2 id="journey-title">赴约的路上，<br>愿你一路轻松。</h2><p>不必盛装，带着好心情就好。<br>你的到来，就是最好的礼物。</p></div>
-      <div class="travel-notes"><div><span class="note-index">01</span><div><h3>婚礼地点</h3><p id="address">杭州 · 花园酒店，西湖区草坪仪式区（演示地址）</p><button class="text-button" id="copy-address">复制示例地址 ↗</button></div></div><div><span class="note-index">02</span><div><h3>出行小贴士</h3><p>正式邀请函可加入停车说明、酒店入口，以及高德或腾讯地图导航。</p></div></div><div><span class="note-index">03</span><div><h3>关于这份邀请</h3><p>这是视觉与交互 demo。正式版可换上你们的婚纱照、音乐和专属故事。</p></div></div></div>
-    </section>
-    <section class="closing"><p class="eyebrow">WITH LOVE, ALWAYS</p><h2>人生喜事，<br><em>与你分享。</em></h2><p>2027.05.20 · 期待与你相见</p><button class="button light" id="share">分享这份欢喜 <span>↗</span></button><span class="closing-flower" aria-hidden="true">✳</span></section>
+    <section class="closing"><p class="eyebrow">OUR FOREVER STARTS HERE</p><div class="closing-monogram" aria-hidden="true">Y<span>&</span>Y</div><h2>有你相伴，<br><em>岁岁妍好。</em></h2><p class="closing-names">李有为 <span>&</span> 谢妍</p><p class="closing-date">2027.01.30　·　泰兴金陵国际大酒店</p><button class="button closing-share" id="share" type="button">分享我们的邀请 <span>↗</span></button><span class="closing-note">WITH LOVE, YOUWEI & YAN.</span></section>
   </main>
-  <footer><span>林予安 & 周知夏</span><span>一纸良缘 · 婚礼邀请函设计示例</span><a href="#home">回到顶部 ↑</a></footer>
-  <div class="toast" role="status" aria-live="polite" id="toast"></div>
+  <footer><span>李有为 & 谢妍 · 婚礼邀请函</span><span>期待与你，一同珍藏这一天。</span><a href="#home">回到开篇 ↑</a></footer>
+  <nav class="mobile-dock" aria-label="手机快捷操作"><a href="#day">01.30　婚礼日程</a><a href="#venue">前往婚礼 <span>↗</span></a></nav>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
