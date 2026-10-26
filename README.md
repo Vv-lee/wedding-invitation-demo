@@ -1,2 +1,5 @@
-# wedding-invitation-demo
-婚礼邀请函设计示例：适配手机和电脑。人物、日期、地址均为演示信息。
+# 婚礼邀请函 Demo
+
+适配手机与电脑的静态邀请函。页面内姓名、日期及场地均为演示信息。
+
+网页入口：https://vv-lee.github.io/wedding-invitation-demo/
