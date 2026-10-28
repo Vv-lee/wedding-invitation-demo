@@ -1,36 +1,10 @@
 'use strict';
-const themes = {
-  romantic: { name: '浪漫西式', color: '#f5e9e4' },
-  modern: { name: '现代中式', color: '#f6f1e7' },
-  garden: { name: '清新花园', color: '#f7f6ee' },
-};
 const wedding = {
   names: '李有为 & 谢妍',
   welcome: '20270130T073000Z',
   banquet: '20270130T101800Z',
   address: '江苏省泰州市泰兴市国庆中路130号 金陵国际大酒店 四楼水晶厅',
 };
-function applyTheme(value) {
-  const theme = Object.prototype.hasOwnProperty.call(themes, value) ? value : 'romantic';
-  document.documentElement.dataset.theme = theme;
-  document.querySelector('meta[name="theme-color"]').setAttribute('content', themes[theme].color);
-  document.querySelectorAll('[data-theme-link]').forEach(link => {
-    if (link.dataset.themeLink === theme) link.setAttribute('aria-current', 'page');
-    else link.removeAttribute('aria-current');
-  });
-  return theme;
-}
-applyTheme(new URL(location.href).searchParams.get('style'));
-document.querySelectorAll('[data-theme-link]').forEach(link => {
-  link.addEventListener('click', event => {
-    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
-    event.preventDefault();
-    const url = new URL(location.href);
-    url.searchParams.set('style', applyTheme(link.dataset.themeLink));
-    history.pushState(null, '', url);
-  });
-});
-window.addEventListener('popstate', () => applyTheme(new URL(location.href).searchParams.get('style')));
 let toastTimer;
 function toast(message) {
   const box = document.getElementById('toast');
@@ -84,20 +58,6 @@ document.getElementById('calendar').addEventListener('click', () => {
   setTimeout(() => URL.revokeObjectURL(url), 30000);
   toast('婚礼日历已生成；若微信限制下载，请在系统浏览器中打开。');
 });
-document.getElementById('share').addEventListener('click', async () => {
-  if (location.protocol === 'file:' || ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname)) {
-    toast('当前是本地预览，发布后即可分享这款设计的邀请链接。');
-    return;
-  }
-  const url = new URL(location.href);
-  url.hash = '';
-  url.searchParams.set('style', document.documentElement.dataset.theme);
-  if (navigator.share) {
-    try { await navigator.share({ title: document.title, text: '有你相伴，岁岁妍好。2027年1月30日，期待与你相见。', url: url.href }); return; }
-    catch (error) { if (error.name === 'AbortError') return; }
-  }
-  toast(await copyText(url.href) ? '邀请链接已复制，把这份欢喜分享出去吧。' : '请使用浏览器菜单分享，或复制地址栏链接。');
-});
 /* An original eight-bar instrumental, rendered locally; no remote audio or recording rights required. */
 function makeMusicBuffer(context) {
   const rate = 22050;
@@ -132,6 +92,7 @@ let audioContext;
 let musicBuffer;
 let musicSource;
 let musicBusy = false;
+let musicWanted = false;
 function updateMusicState(playing) {
   const button = document.getElementById('music');
   button.setAttribute('aria-pressed', String(playing));
@@ -139,18 +100,20 @@ function updateMusicState(playing) {
   document.getElementById('music-label').textContent = playing ? '音乐播放中' : '开启音乐';
 }
 function stopMusic() {
+  musicWanted = false;
   if (musicSource) { musicSource.stop(); musicSource.disconnect(); musicSource = null; }
   updateMusicState(false);
 }
-document.getElementById('music').addEventListener('click', async () => {
-  if (musicBusy) return;
-  if (musicSource) { stopMusic(); return; }
+async function startMusic() {
+  if (musicBusy || musicSource) return;
   const Audio = window.AudioContext || window.webkitAudioContext;
   if (!Audio) { toast('当前浏览器暂不支持轻音乐播放，可尝试在系统浏览器中打开。'); return; }
   musicBusy = true;
+  musicWanted = true;
   try {
     audioContext ||= new Audio();
     await audioContext.resume();
+    if (!musicWanted || document.hidden) return;
     if (audioContext.state !== 'running') throw new Error('Audio is blocked');
     musicBuffer ||= makeMusicBuffer(audioContext);
     const source = audioContext.createBufferSource();
@@ -164,5 +127,9 @@ document.getElementById('music').addEventListener('click', async () => {
     stopMusic();
     toast('音乐未能开启，请再点击一次，或在系统浏览器中打开。');
   } finally { musicBusy = false; }
+}
+document.getElementById('music').addEventListener('click', () => {
+  if (musicSource || musicBusy) stopMusic();
+  else startMusic();
 });
 document.addEventListener('visibilitychange', () => { if (document.hidden) stopMusic(); });
