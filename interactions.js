@@ -1,26 +1,41 @@
 const cover = document.getElementById('cover');
 const invitation = document.getElementById('invitation');
 let opening = false;
-document.getElementById('open-letter').addEventListener('click', () => {
+const openLetter = document.getElementById('open-letter');
+const enterInvitation = document.getElementById('enter-invitation');
+const coverHint = document.querySelector('.cover-hint');
+const letterPreview = document.querySelector('.letter-preview');
+openLetter.addEventListener('click', () => {
   if (opening) return;
   opening = true;
   startMusic();
+  openLetter.disabled = true;
+  openLetter.setAttribute('aria-expanded', 'true');
   cover.classList.add('unsealing');
-  setTimeout(() => {
-    cover.hidden = true;
-    invitation.hidden = false;
-    invitation.focus({preventScroll:true});
-    window.scrollTo({top:0,behavior:'auto'});
-    opening = false;
-  }, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 650);
+  coverHint.textContent = '这一席，想留给你。';
+  letterPreview.setAttribute('aria-hidden', 'false');
+  enterInvitation.hidden = false;
+  enterInvitation.focus({preventScroll:true});
+});
+enterInvitation.addEventListener('click', () => {
+  cover.hidden = true;
+  invitation.hidden = false;
+  invitation.focus({preventScroll:true});
+  window.scrollTo({top:0,behavior:'auto'});
 });
 document.getElementById('replay').addEventListener('click', () => {
   stopMusic();
   invitation.hidden = true;
   cover.hidden = false;
   cover.classList.remove('unsealing');
+  opening = false;
+  openLetter.disabled = false;
+  openLetter.setAttribute('aria-expanded', 'false');
+  enterInvitation.hidden = true;
+  letterPreview.setAttribute('aria-hidden', 'true');
+  coverHint.replaceChildren('轻触蜡封，拆开这份欢喜 ', Object.assign(document.createElement('span'), {textContent:'↑'}));
   window.scrollTo({top:0,behavior:'auto'});
-  document.getElementById('open-letter').focus({preventScroll:true});
+  openLetter.focus({preventScroll:true});
 });
 function countdownParts(now) {
   const remaining = Math.max(0, new Date('2027-01-30T15:30:00+08:00').getTime() - now);
@@ -33,26 +48,6 @@ function updateCountdown() {
 }
 updateCountdown();
 setInterval(updateCountdown,60000);
-const album = document.getElementById('album');
-const slides = Array.from(album.querySelectorAll('figure'));
-const dots = Array.from(document.querySelectorAll('[data-slide]'));
-function goToSlide(index) {
-  const slide = slides[index];
-  const left = album.scrollLeft + slide.getBoundingClientRect().left - album.getBoundingClientRect().left - (album.clientWidth-slide.offsetWidth)/2;
-  album.scrollTo({left,behavior:'smooth'});
-}
-dots.forEach((button,index)=>button.addEventListener('click',()=>goToSlide(index)));
-album.addEventListener('keydown',event=>{
-  if (!['ArrowRight','ArrowLeft'].includes(event.key)) return;
-  event.preventDefault();
-  const current = dots.findIndex(button=>button.getAttribute('aria-pressed')==='true');
-  goToSlide(Math.max(0,Math.min(slides.length-1,current+(event.key==='ArrowRight'?1:-1))));
-});
-album.addEventListener('scroll',()=>{
-  const center=album.getBoundingClientRect().left+album.clientWidth/2;
-  const closest=slides.reduce((best,slide,index)=>Math.abs(slide.getBoundingClientRect().left+slide.offsetWidth/2-center)<best.distance?{index,distance:Math.abs(slide.getBoundingClientRect().left+slide.offsetWidth/2-center)}:best,{index:0,distance:Infinity}).index;
-  dots.forEach((button,index)=>button.setAttribute('aria-pressed',String(index===closest)));
-},{passive:true});
 if ('IntersectionObserver' in window) {
   const navigation = Array.from(document.querySelectorAll('[data-nav]'));
   const observer = new IntersectionObserver(entries=>{
@@ -63,7 +58,7 @@ if ('IntersectionObserver' in window) {
 const guestInput = document.getElementById('guest-name');
 try { guestInput.value = (localStorage.getItem('wedding-guest-name')||'').slice(0,20); } catch { /* Storage may be unavailable in embedded/private browsers. */ }
 async function drawInvitationCard(name, blessing) {
-  await Promise.all([document.fonts.load('80px InvitationScript'),document.fonts.load('24px InvitationSong')]);
+  await Promise.all([document.fonts.load('80px InvitationScript'),document.fonts.load('24px InvitationSong'),document.fonts.load('35px InvitationCalligraphy','李有为谢妍')]);
   const logo = new Image();
   const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160">'+document.getElementById('brand-mark').innerHTML+'</svg>';
   const logoReady = new Promise((resolve,reject)=>{logo.onload=resolve;logo.onerror=reject;});
@@ -78,18 +73,19 @@ async function drawInvitationCard(name, blessing) {
   ctx.textAlign='center';ctx.fillStyle='#b49a75';ctx.font='16px Georgia';ctx.fillText('A LETTER, JUST FOR YOU',375,115);
   ctx.drawImage(logo,295,149,160,160);
   ctx.fillStyle='#94665d';ctx.font='94px InvitationScript';ctx.fillText('Youwei & Yan',375,390);
-  ctx.font='29px InvitationSong';ctx.fillText('李有为  &  谢妍',375,446);
+  ctx.font='35px InvitationCalligraphy';ctx.fillText('李有为  &  谢妍',375,446);
   ctx.strokeStyle='#c3a584';ctx.beginPath();ctx.moveTo(170,497);ctx.lineTo(580,497);ctx.stroke();
   ctx.fillStyle='#826456';ctx.font='22px "Microsoft YaHei", sans-serif';ctx.fillText('亲爱的',375,560);
   let size=39;ctx.font=`${size}px "Microsoft YaHei", sans-serif`;
   while(ctx.measureText(name).width>570&&size>17){size--;ctx.font=`${size}px "Microsoft YaHei", sans-serif`;}
   ctx.fillStyle='#98675d';ctx.fillText(name,375,625);
   ctx.fillStyle='#826456';ctx.font='22px "Microsoft YaHei", sans-serif';ctx.fillText('这一席，想留给你。',375,687);
-  ctx.font='34px Georgia';ctx.fillText('2027.01.30',375,777);
-  ctx.fillStyle='#b49a75';ctx.font='17px "Microsoft YaHei", sans-serif';ctx.fillText('把今天的欢喜，也送一份给你',375,827);
+  ctx.font='34px Georgia';ctx.fillText('2027.01.30',375,765);
+  ctx.font='22px InvitationSong';ctx.fillText('丙午年 · 腊月廿三',375,801);
+  ctx.fillStyle='#b49a75';ctx.font='17px "Microsoft YaHei", sans-serif';ctx.fillText('把今天的欢喜，也送一份给你',375,849);
   ctx.fillStyle='#826456';ctx.font='26px "Microsoft YaHei", sans-serif';
   const lines=blessingLines(blessing,text=>ctx.measureText(text).width,574);
-  const firstLine=899-(lines.length-1)*20;
+  const firstLine=913-(lines.length-1)*20;
   lines.forEach((line,index)=>ctx.fillText(line,375,firstLine+index*40));
   ctx.fillStyle='#b49a75';ctx.font='19px "Microsoft YaHei", sans-serif';ctx.fillText('有你相伴，岁岁妍好。',375,997);
   return canvas.toDataURL('image/png');
