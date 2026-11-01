@@ -23,6 +23,7 @@ const photoCaption = document.getElementById('gallery-caption');
 let activeCollection;
 let activePhoto = 0;
 let lastBubble;
+let lastBubbleWasKeyboard = false;
 const memoryField = document.getElementById('memory-field');
 const memoryButtons = new Map();
 const floatingHearts = [];
@@ -70,7 +71,7 @@ photoCollections.forEach(collection => {
   seenMark.textContent = '✓';
   seenMark.setAttribute('aria-hidden','true');
   bubble.append(material,glass,copy,seenMark);
-  bubble.addEventListener('click',() => openPhotoCollection(collection.id,bubble));
+  bubble.addEventListener('click',event => openPhotoCollection(collection.id,bubble,event.detail === 0));
   memoryButtons.set(collection.id,{button:bubble,group,seenMark,collection});
   memoryCloud.append(bubble);
   floatingHearts.push({button:bubble,x:0,y:0,vx:(Math.random()<.5?-1:1)*(18+Math.random()*12),vy:(Math.random()<.5?-1:1)*(15+Math.random()*12),phase:Math.random()*Math.PI*2,size:62,radius:37});
@@ -176,12 +177,13 @@ function renderPhotoCollection() {
   photoNext.disabled = !photo || activePhoto === photos.length-1;
 }
 
-function openPhotoCollection(id,bubble) {
+function openPhotoCollection(id,bubble,fromKeyboard = false) {
   const collection = photoCollections.find(item => item.id === id);
   if (!collection) return;
   activeCollection = collection;
   activePhoto = 0;
   lastBubble = bubble;
+  lastBubbleWasKeyboard = fromKeyboard;
   renderPhotoCollection();
   markMemoryHeart(bubble);
   document.body.classList.add('gallery-open');
@@ -202,6 +204,8 @@ photoClose.addEventListener('click',() => photoDialog.close());
 photoDialog.addEventListener('close',() => {
   document.body.classList.remove('gallery-open');
   lastBubble?.focus({preventScroll:true});
+  // Restored focus can look keyboard-visible even after a touch or mouse click.
+  heartFocused = lastBubbleWasKeyboard;
   syncHeartMotion();
 });
 photoDialog.addEventListener('keydown',event => {
