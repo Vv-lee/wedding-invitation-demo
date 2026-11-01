@@ -1,16 +1,19 @@
 'use strict';
+const invitationUrl = new URL(window.location.href);
+if (invitationUrl.searchParams.has('v')) {
+  invitationUrl.searchParams.delete('v');
+  window.history.replaceState(window.history.state, '', invitationUrl.pathname + invitationUrl.search + invitationUrl.hash);
+}
 const filmIntro = document.getElementById('film-intro');
 const introVideo = document.getElementById('intro-video');
 const playIntro = document.getElementById('play-intro');
 const introPlayLabel = document.getElementById('intro-play-label');
 const introStatus = document.getElementById('intro-status');
 let introFinished = false;
-let introEndTimer = 0;
 
 function finishIntro() {
   if (introFinished) return;
   introFinished = true;
-  clearTimeout(introEndTimer);
   introVideo.pause();
   introVideo.controls = false;
   filmIntro.hidden = true;
@@ -52,11 +55,8 @@ introVideo.addEventListener('error', () => {
   playIntro.hidden = false;
   introStatus.textContent = '短片暂时未能播放，可以直接拆开邀请。';
 });
-introVideo.addEventListener('ended', () => {
-  if (introFinished || introEndTimer) return;
-  introVideo.controls = false;
-  introEndTimer = setTimeout(finishIntro, 1000);
-});
+// The one-second final-frame hold and complete original dialogue are in the video.
+introVideo.addEventListener('ended', finishIntro);
 document.getElementById('skip-intro').addEventListener('click', finishIntro);
 document.addEventListener('visibilitychange', () => {
   if (document.hidden && !introFinished) introVideo.pause();
