@@ -4,8 +4,9 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f7eeea">
 <meta name="description" content="李有为与谢妍的婚礼邀请函。2027年1月30日（丙午年腊月廿三），泰兴金陵国际大酒店四楼水晶厅。">
 <title>有你相伴，岁岁妍好 · 李有为 & 谢妍</title>
-<link rel="preload" href="./assets/fonts/PinyonScript-Regular.ttf?v=20261029-1" as="font" type="font/ttf" crossorigin><link rel="preload" href="./assets/fonts/InvitationSong.woff2?v=20261029-1" as="font" type="font/woff2" crossorigin><link rel="preload" href="./assets/fonts/LongCang-Names.woff2?v=20261029-1" as="font" type="font/woff2" crossorigin><link rel="icon" href="./assets/monogram.svg"><link rel="stylesheet" href="./style.css?v=20261029-1"><script src="./app.js?v=20261029-1" defer></script><script src="./blessings.js?v=20261029-1" defer></script><script src="./interactions.js?v=20261029-1" defer></script>
-<link rel="stylesheet" href="./typography.css?v=20261029-1"><link rel="stylesheet" href="./gallery.css?v=20261029-1"><script src="./gallery.js?v=20261029-1" defer></script>
+<link rel="preload" href="./assets/fonts/PinyonScript-Regular.ttf?v=20261101-3" as="font" type="font/ttf" crossorigin><link rel="preload" href="./assets/fonts/InvitationSong.woff2?v=20261101-3" as="font" type="font/woff2" crossorigin><link rel="preload" href="./assets/fonts/LongCang-Names.woff2?v=20261101-3" as="font" type="font/woff2" crossorigin><link rel="icon" href="./assets/monogram.svg"><link rel="stylesheet" href="./style.css?v=20261101-3"><script src="./app.js?v=20261101-3" defer></script><script src="./blessings.js?v=20261101-3" defer></script><script src="./interactions.js?v=20261101-3" defer></script>
+<link rel="stylesheet" href="./typography.css?v=20261101-3"><link rel="stylesheet" href="./gallery.css?v=20261101-3"><script src="./gallery.js?v=20261101-3" defer></script>
+<link rel="stylesheet" href="./intro.css?v=20261101-3"><script src="./intro.js?v=20261101-3" defer></script>
 </head>
 <body>
 <audio id="wedding-music" src="./assets/audio/love-story.mp3" preload="none" loop hidden></audio>
@@ -19,7 +20,12 @@
 <path d="M80 137l3 5-3 5-3-5z" fill="#b79b70" stroke="none"/>
 </g></symbol></defs></svg>
 <div class="phone-page">
-  <section class="cover" id="cover" aria-labelledby="cover-title">
+  <section class="film-intro" id="film-intro" aria-labelledby="film-title">
+    <div class="film-heading"><img src="./assets/monogram.svg" width="38" height="38" alt="并蒂双 Y"><p class="eyebrow">A LITTLE PRELUDE</p><h1 id="film-title">A little story,<br><span>just for you.</span></h1><p class="film-dedication">有你在场，便是圆满。</p></div>
+    <div class="film-player"><div class="film-screen"><video id="intro-video" src="./assets/video/wedding-prelude.mp4" poster="./assets/video/wedding-prelude-poster.jpg" preload="metadata" playsinline webkit-playsinline aria-label="婚礼开场短片，18 秒，含原声和字幕"></video><button type="button" id="play-intro" class="film-play" aria-label="播放开场短片"><span class="film-play-icon" aria-hidden="true"></span><span id="intro-play-label">轻触播放</span></button></div><div class="film-caption"><span>YOU ARE PART OF OUR STORY</span><span>18″ · WITH SOUND</span></div></div>
+    <div class="film-footer"><p id="intro-status" role="status">先听一声邀请，再拆开这封信。</p><button type="button" id="skip-intro" class="film-skip">跳过短片 · 拆开邀请 <span aria-hidden="true">→</span></button><span class="film-signature">Youwei &amp; Yan</span></div>
+  </section>
+  <section class="cover" id="cover" aria-labelledby="cover-title" hidden>
     <span class="cover-top">SOMETHING BEAUTIFUL IS ABOUT TO BEGIN</span>
     <div class="cover-heading"><span class="eyebrow">A LETTER, JUST FOR YOU</span><h1 id="cover-title">一封关于<br><em>我们</em>的邀请。</h1><p>有你在场，便是圆满。</p></div>
     <div class="envelope"><div class="letter-peek"><svg class="brand-mark" viewBox="0 0 160 160" aria-hidden="true"><use href="#brand-mark"/></svg><small>YOUWEI & YAN</small><div class="letter-preview" aria-hidden="true"><p class="letter-names">李有为 <i>&</i> 谢妍</p><!-- 有照片后，用一张 img 替换 letter-photo-placeholder，保留外层相框。 --><figure class="letter-photo" aria-label="预留一张新人合照"><div class="letter-photo-placeholder"><svg viewBox="0 0 80 85" aria-hidden="true"><path d="M40 63C30 51 17 46 19 33c1-12 16-14 21-3 5-11 20-9 21 3 2 13-11 18-21 30Z"/><path d="M24 75q16-12 32 0M40 63v10M26 17l-4-5m32 5 4-5M40 12V6"/></svg><span>OUR MOMENT</span><small>我们的合照</small></div></figure><p class="letter-date">2027.01.30</p><p class="letter-lunar">丙午年 · 腊月廿三</p></div></div><div class="envelope-back"></div><div class="envelope-front"></div><div class="envelope-flap"></div><button id="open-letter" class="wax-seal" aria-label="拆开婚礼邀请函" aria-expanded="false" aria-controls="enter-invitation"><svg class="brand-mark" viewBox="0 0 160 160" aria-hidden="true"><use href="#brand-mark"/></svg><small>OPEN</small></button></div>
